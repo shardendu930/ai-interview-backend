@@ -38,10 +38,8 @@ async function registerUser(req, res) {
       user,
     });
   } catch (error) {
-    // Print the error in the terminal
     console.error(error);
 
-    // Send error response to the client
     return res.status(500).json({
       message: "Internal Server Error",
     });
