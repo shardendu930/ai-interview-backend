@@ -75,11 +75,16 @@ async function loginUser(req, res) {
       process.env.JWT_SECRET,
     );
 
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
 
     return res.status(200).json({
       message: "Login successful",
-      user,
+      user: userData,
     });
   } catch (error) {
     console.error(error);
@@ -92,7 +97,11 @@ async function loginUser(req, res) {
 
 async function logoutUser(req, res) {
   try {
-    res.clearCookie("token");
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+    });
 
     return res.status(200).json({
       message: "Logout successfull",
