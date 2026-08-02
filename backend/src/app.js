@@ -10,8 +10,11 @@ const app = express();
 
 app.use(
   cors({
-    origin:
+    origin: [
+      "http://localhost:5173",
       "https://ai-interview-platform-pdroh116e-shardendu930s-projects.vercel.app",
+    ],
+
     credentials: true,
   }),
 );
